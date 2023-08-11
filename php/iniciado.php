@@ -1,21 +1,24 @@
 <?php
 session_start();
-if(!isset($_SESSION['cliente'])){
-    echo"<script>alert('por favor debes ingresar sesion');window.location.href='IniciarSesion.html</script>";
-    session_destroy();
+error_reporting(0);
+$varsesion=$_SESSION['role'];
+if ($varsesion==NULL || $varsesion='') {
+    header("location: ../IniciarSesion.html");
+    // session_destroy();
     die();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost:80/baguette/assets/css/Default-Styles/EstilosIndex.css">
-    <link rel="stylesheet" href="../assets/css/Default-Styles/EstilosIndex.css">
+    <link rel="stylesheet" href="../assets/css/usuario/EstilosIndex.css">
+    <link rel="stylesheet" href="../assets/css/Default-Styles/PagarCarrito.css">
     <link rel="stylesheet" href="../assets/css/Default-Styles/Footer-and-Header.css">
+        <script src="https://kit.fontawesome.com/c34d8fffbe.js" crossorigin="anonymous"></script>
     <link rel="icon" href="https://raw.githubusercontent.com/Ronaldo07rgr/Repositorio_LaBaguette/master/assets/Icon/LaBaguette.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,175 +27,181 @@ if(!isset($_SESSION['cliente'])){
 </head>
 
 <body>
-     <div class="parent-container">
-         <header>
-             <div class="menu_encabezadop1">
-             <!-- Encabezado Parte 1: este código HTML describe una sección de encabezado que incluye enlaces a las páginas de redes sociales del usuario, enlaces para iniciar sesión en el sitio web y un ícono de carrito de compras.-->
-              <div class="conteiner">
-                <div class="social">
-                  <ul>
-                    <li>
-                      <a href="https://www.facebook.com/ronaldo.stiven52">
-                        <i class="fab fa-facebook-f icon"></i>
-                      </a>
-                    </li>
-              
-                    <li>
-                      <a href="#">
-                        <i class="fab fa-twitter icon"></i>
-                      </a>
-                    </li>
-              
-                    <li>
-                      <a href="https://wa.me/+573154875304">
-                        <i class="fab fa-whatsapp icon"></i>
-                      </a>
-                    </li>
-              
-                    <li>
-                      <a href="https://www.instagram.com/ronaldo07_rg/">
-                        <i class="fab fa-instagram icon"></i>
-                      </a>
-                    </li>
-                  </ul>
-              
-                  <div class="user">
-                    <a href="/usuario.html">
-                      <i class="fa fa-user"></i>
-                    </a>
-                    <a href="assets/php/CerrarSesion.php">
-                      <span>Cerrar sesion</span>
-                    </a>
-              
-                  </div>
-              
-                  <div class="shopping">
-                    <i class="fa fa-shopping-cart" onclick="showCartMenu()"></i>
-                    <div class="cart-menu" id="cartMenu">
-                      <h2>Mi Carrito</h2>
-                      <div class="direction">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Direccion de Residencia</p>
-                      </div>
-                      <hr>
-                      <button class="close" onclick="hideCartMenu()">X</button>
-                      <div class="cart-items">
+    <div class="parent-container">
+        <header>
+            <div class="menu_encabezadop1">
+                <!-- Encabezado Parte 1: este código HTML describe una sección de encabezado que incluye enlaces a las páginas de redes sociales del usuario, enlaces para iniciar sesión en el sitio web y un ícono de carrito de compras.-->
+                <div class="conteiner">
+                    <div class="social">
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/ronaldo.stiven52">
+                                    <i class="fab fa-facebook-f icon"></i>
+                                </a>
+                            </li>
 
-                      </div>
-                      <div class="buttons">
-                        <button id="button1">Seleccionar metodo de pago</button>
-                        <div>
-                          <button class="button-option" onclick="selectButton(this)">Domicilio</button>
-                          <button class="button-option" onclick="selectButton(this)">Ir a la tienda</button>
+                            <li>
+                                <a href="#">
+                                <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="https://wa.me/+573154875304">
+                                    <i class="fab fa-whatsapp icon"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.instagram.com/ronaldo07_rg/">
+                                    <i class="fab fa-instagram icon"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="user">
+                            <a href="/baguette/usuario.html">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <a href="../php/CerrarSesion.php">
+                                <span>Cerrar sesion</span>
+                            </a>
+
                         </div>
-                        <div class="cam">
-                                    
-                            <button class="bott" id="subtotal">Pagar   Subtotal: $10.000</button>
-                          </div>
-                      </div>
+                        <div class="shopping">
+                            <i class="fa fa-shopping-cart" onclick="showCartMenu()"></i>
+                            <div class="cart-menu" id="cartMenu">
+                                <h2>Mi Carrito</h2>
+                                <div class="direction">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Direccion de Residencia</p>
+                                </div>
+                                <hr>
+                                <button class="close" onclick="hideCartMenu()">X</button>
+                                <div class="cart-items">
+
+                                </div>
+                                <div class="buttons">
+                                    <button id="button1">Seleccionar metodo de pago</button>
+                                    <div>
+                                        <button class="button-option" onclick="selectButton(this)">Domicilio</button>
+                                        <button class="button-option" onclick="selectButton(this)">Ir a la tienda</button>
+                                    </div>
+                                    <div class="cam">
+
+                                        <button class="bott" id="subtotal">Pagar Subtotal: $10.000</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            
+
 
             <div class="conteiner">
-            <!-- Encabezado Parte 2 menu: este código HTML describe una sección de encabezado que incluye una barra de navegación con enlaces a diferentes páginas del sitio web y un logotipo.-->  
+                <!-- Encabezado Parte 2 menu: este código HTML describe una sección de encabezado que incluye una barra de navegación con enlaces a diferentes páginas del sitio web y un logotipo.-->
                 <div class="menuconteiner">
 
                     <div class="menu">
 
                         <nav>
-                            <a href="#"><p>INICIO</p></a>
-                            <a href="#" class="has-submenu"><p>NOSOTROS</p></a>
+                            <a href="#">
+                                <p>INICIO</p>
+                            </a>
+                            <a href="#" class="has-submenu">
+                                <p>NOSOTROS</p>
+                            </a>
                             <ul class="submenu">
-                              <li><a href="Nosotros.html">MISION Y VISION</a></li>
-                              <li><a href="Nosotros.html">QUIENES SOMOS</a></li>
+                                <li><a href="Nosotros.php">MISION Y VISION</a></li>
+                                <li><a href="Nosotros.php">QUIENES SOMOS</a></li>
                             </ul>
                         </nav>
-                        
+
                         <div class="logo">
                             <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Encabezado%20y%20pie%20de%20pagina/LaBaguette-Encabezado.png?raw=true">
                         </div>
 
                         <nav>
-                            <a href="Contactos.html"><p>CONTACTOS</p></a>
-                            <a href="Sucursales.html"><p>SUCURSALES</p></a>
+                            <a href="ContactosUsuario.php">
+                                <p>CONTACTOS</p>
+                            </a>
+                            <a href="Sucursales.php">
+                                <p>SUCURSALES</p>
+                            </a>
                         </nav>
-                
+
                     </div>
                 </div>
             </div>
         </header>
-    
+
         <main>
-        <!-- Este código HTML representa la sección principal de una página web, que contiene un carrusel de imágenes con botones de paginación para cambiar entre ellas. La sección se encuentra dentro de una etiqueta <main>, que indica que es el contenido principal de la página.
+            <!-- Este código ph representa la sección principal de una página web, que contiene un carrusel de imágenes con botones de paginación para cambiar entre ellas. La sección se encuentra dentro de una etiqueta <main>, que indica que es el contenido principal de la página.
         El carrusel de imágenes está implementado mediante la etiqueta <input> con el atributo type establecido en "radio", que se utiliza para mantener un control de la imagen que se está mostrando actualmente. Cada imagen se muestra dentro de un contenedor con la clase "img", y las imágenes son referenciadas por sus URLs en el atributo src de la etiqueta <img>.
         Finalmente, los botones de paginación se implementan mediante etiquetas <label> que están vinculadas a cada imagen mediante el atributo for con el mismo valor que el atributo id de la etiqueta <input> correspondiente.-->
             <div class="hero">
                 <div class="conteiner-slider">
 
-                    <input type="radio" id="1" name="slider-img" hidden/>
-                    <input type="radio" id="2" name="slider-img" hidden/>
-                    <input type="radio" id="3" name="slider-img" hidden/>
+                    <input type="radio" id="1" name="slider-img" hidden />
+                    <input type="radio" id="2" name="slider-img" hidden />
+                    <input type="radio" id="3" name="slider-img" hidden />
 
-                        <div class="slider">
+                    <div class="slider">
 
-                            <div class="img">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(1).webp?raw=true">
-                            </div>
-                    
-                            <div class="img">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(2).webp?raw=true">
-                            </div>
-                    
-                            <div class="img">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(3).webp?raw=true">
-                            </div>
-
+                        <div class="img">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(1).webp?raw=true">
                         </div>
-                    
-                        <div class="pagination">
 
-                            <label class="img-pag" for="1">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(1).webp?raw=true">
-                            </label>
-                    
-                            <label class="img-pag" for="2">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(2).webp?raw=true">
-                            </label>
-                    
-                            <label class="img-pag" for="3">
-                                <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(3).webp?raw=true">
-                            </label>
-
+                        <div class="img">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(2).webp?raw=true">
                         </div>
+
+                        <div class="img">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(3).webp?raw=true">
+                        </div>
+
+                    </div>
+
+                    <div class="pagination">
+
+                        <label class="img-pag" for="1">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(1).webp?raw=true">
+                        </label>
+
+                        <label class="img-pag" for="2">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(2).webp?raw=true">
+                        </label>
+
+                        <label class="img-pag" for="3">
+                            <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carrusel%20Index/Carrusel%20(3).webp?raw=true">
+                        </label>
+
+                    </div>
                 </div>
             </div>
 
         </main>
 
         <aside>
-        <!--Este código HTML corresponde a una sección de una página web que presenta los productos que ofrece un negocio de panadería y repostería. La sección está estructurada en tres columnas que contienen imágenes, títulos, descripciones y botones para ver más detalles de cada producto.
+            <!--Este código ph corresponde a una sección de una página web que presenta los productos que ofrece un negocio de panadería y repostería. La sección está estructurada en tres columnas que contienen imágenes, títulos, descripciones y botones para ver más detalles de cada producto.
         Cada columna se define con la clase "letters" y contiene una imagen del producto y un bloque de texto que incluye el título y descripción del mismo. Además, cada columna tiene un botón "Ver Productos" que lleva a otra página donde se pueden ver más detalles sobre los productos.
         La sección está contenida dentro de un elemento <aside>, que se utiliza comúnmente para contenido secundario que complementa el contenido principal de la página.-->
             <div class="conteiner">
                 <div>
                     <h2>te ofrecemos</h2>
                 </div>
-                
+
                 <div class="letter-content">
 
                     <div class="letters">
                         <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carts/Variedad%20De%20Pan.webp?raw=true">
-                        
+
                         <div>
 
                             <h3>Variedad de Pan</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Panes saludables y nutritivos con  opciones de pan que puedes encontrar en diferentes culturas y regiones del mundo. Cada uno con su propio sabor especial y características únicas ideales para usted. ¡Buen provecho!</p>
                             <section>
-                                <a href="CatalogoPan.html">
+                                <a href="CatalogoPan.php">
                                     <button>
                                         <span></span>
                                         <span></span>
@@ -209,13 +218,13 @@ if(!isset($_SESSION['cliente'])){
                     <div class="letters">
 
                         <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carts/Variedad%20De%20Pasteles.webp?raw=true">
-                        
+
                         <div>
 
                             <h3>Variedad de Pasteles</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Pasteles elegantes y distintivos son solo una muestra de la amplia variedad de opciones disponibles para satisfacer cualquier antojo dulce. Desde los clásicos hasta los más innovadores, siempre hay un pastel perfecto para cada ocasión y temporada. ¡Disfruta cada delicioso bocado!</p>
                             <section>
-                                <a href="CatalogoPasteles.html">
+                                <a href="CatalogoPasteles.php">
                                     <button>
                                         <span></span>
                                         <span></span>
@@ -228,19 +237,19 @@ if(!isset($_SESSION['cliente'])){
 
                         </div>
 
-                        
+
                     </div>
 
                     <div class="letters">
 
                         <img src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Carts/Variedad%20De%20Otros.webp?raw=true">
-                        
+
                         <div>
 
                             <h3>Variedad de Otros</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Estas variedades sirven para quitar el antojo y ofrecen una amplia gama de sabores y opciones para satisfacer cualquier preferencia. ¡Disfrútalas en compañía de familiares y amigos en cualquier ocasión!</p>
                             <section>
-                                <a href="CatalogoOtros.html">
+                                <a href="CatalogoOtros.php">
                                     <button>
                                         <span></span>
                                         <span></span>
@@ -252,7 +261,7 @@ if(!isset($_SESSION['cliente'])){
                             </section>
 
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -262,14 +271,8 @@ if(!isset($_SESSION['cliente'])){
 
         <footer>
         <!--El footer está compuesto por cuatro secciones, incluyendo una sección de empresa con enlaces a la página de inicio, contacto y nosotros, una sección de servicios con enlaces a domicilios y pedidos especiales, una sección de redes sociales con enlaces a Facebook, Twitter, WhatsApp e Instagram, y una sección de derechos de autor y políticas de privacidad. -->
+            
             <div class="conteiner">
-
-                <div class="header">
-                    <div class="logo">
-                        <span></span>
-                    </div>
-
-                </div>
 
                 <hr>
 
@@ -282,10 +285,10 @@ if(!isset($_SESSION['cliente'])){
                         <a href="Nosotros.html">Nosotros</a>
                     </div>
 
-                    <div>
-                        <h2>Servicios</h2>
-                        <a href="#">Domicilios</a>
-                        <a href="#">Pedios Especiales</a>
+                    <div class="container">
+                        <div class="logo">
+                            <span></span>
+                        </div>
                     </div>
 
                     <div>
@@ -300,7 +303,7 @@ if(!isset($_SESSION['cliente'])){
     
                                 <li>
                                     <a href="#">
-                                        <i class="fab fa-twitter icon"></i>
+                                    <i class="fa-brands fa-x-twitter"></i>
                                     </a>
                                 </li>
     
@@ -322,8 +325,8 @@ if(!isset($_SESSION['cliente'])){
                 </div>
 
                 <div class="Rights">
-                    <p>Copyright©2023LaBaguette. All right reserved</p>
-                    <p>Privacy Policy  Terms and conditions</p>
+                    <p>Copyright©2023LaBaguette. Todos los derechos reservados</p>
+                    <p>Política de privacidad Términos y condiciones</p>
                 </div>
 
             </div>
@@ -393,9 +396,10 @@ if(!isset($_SESSION['cliente'])){
               </div>
         </footer>
 
-    </div> 
+    </div>
 </body>
 
 <script src="../assets/js/main.js"></script>
 <Script src="../assets/js/botonSubtotal.js"></Script>
+
 </html>

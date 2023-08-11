@@ -2,45 +2,56 @@
 include("conexion.php");
 $conectar =conectar();
 $correo=$_POST["correo"];
+// // mensaje
+// $mensaje = '
+// <html>
+// <head>
+//   <title>codigo de verificacion</title>
+// </head>
+// <body>
+//   <p>¡Este es tu codigo de verificacion!</p>
+//   <h2>'.$codigo.'</h2>
+// </body>
+// </html>
+// ';
+$verificar=mysqli_query($conectar,"SELECT * FROM clientes WHERE correo='$correo' ");
+date_default_timezone_set('America/Bogota');
+$tiempo_limite = date('Y-m-d H:i:s', strtotime('-1 minutes'));
 
-// Varios destinatarios
-//$para  = 'jmeneseslicona22@gmail.com' . ', '; // atención a la coma
-//$para .= 'wez@example.com';
-$header="From: $correo". "\r\n";
-$header.="Reply-to: jemeneses66@misena.edu.co". "\r\n";
-$header.="x-Mailer: PHP/".phpversion();
+if(mysqli_num_rows($verificar) < 1){
+  echo"<script>alert('Este correo no esta registrado'); window.location.href='/baguette/olvideContraseña.html'</script>";
+    exit;
+}
 
-// título
-$título = 'codigo de verificacion';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Generar un código de verificación aleatorio
+  $codigo_verificacion = rand(100000, 999999);
 
-$codigo=rand(1000,9999);
+  // Obtener la dirección de correo electrónico proporcionada por el usuario
+  $correo=$_POST["correo"];
 
-// mensaje
-$mensaje = '
-<html>
-<head>
-  <title>codigo de verificacion</title>
-</head>
-<body>
-  <p>¡Este es tu codigo de verificacion!</p>
-  <h2>'.$codigo.'</h2>
-</body>
-</html>
-';
+  // Configurar el correo
+  $to = $correo;
+  $subject = "Código de verificación";
+  $message = "Su código de verificación es: " . $codigo_verificacion ."\nEste codigo solo funcionara por los proximos 5 minutos";
+  $headers = "From:labaguettedufour@gmail.com" . "\r\n" .
+             "Reply-To:labaguettedufour@gmail.com" . "\r\n" .
+             "x-Mailer: PHP/" . phpversion();
 
-// Para enviar un correo HTML, debe establecerse la cabecera Content-type
-$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-/*
-// Cabeceras adicionales
-$cabeceras .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
-$cabeceras .= 'From: Recordatorio <cumples@example.com>' . "\r\n";
-$cabeceras .= 'Cc: birthdayarchive@example.com' . "\r\n";
-$cabeceras .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-*/
-// Enviarlo
-@mail($header, $título, $mensaje, $cabeceras);
-echo"
-<script>alert('Se envio un correo con el codigo'); window.location.href='http://localhost/baguette/olvideContrase%C3%B1a.html'</script>";
-
+  // Enviar el correo
+  if (@mail($to, $subject, $message, $headers)) {
+      //$conectar->query("INSERT INTO clientes (codigos) VALUES('$codigo_verificacion')")or die($conectar->errno);
+      $conectar->query("UPDATE clientes SET codigos =('$codigo_verificacion') WHERE correo =('$correo');")or die($conectar->errno);
+      sleep(300);
+      try {
+          $conectar->query("UPDATE clientes SET codigos = NULL WHERE codigos = ('$codigo_verificacion')") or die($conectar->error);
+         
+      } catch (Exception $e) {
+          echo "Error: " . $e->getMessage();
+      }
+    echo"<script>alert('Ha sido enviado un correo con el codigo de verificacion exitosamente a $correo'); window.location.href='./verificar.php'</script>";
+  } else {
+    echo"<script>alert('Ha habido un error al enviar el correo'); window.location.href='/baguette/olvideContraseña.html'</script>";
+  }
+}
 ?>

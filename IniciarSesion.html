@@ -6,26 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets\css\Login\EstilosIniciarSesion.css">
-    <link rel="icon"
-        href="https://raw.githubusercontent.com/Ronaldo07rgr/Repositorio_LaBaguette/master/assets/Icon/LaBaguette.ico">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="https://raw.githubusercontent.com/Ronaldo07rgr/Repositorio_LaBaguette/master/assets/Icon/LaBaguette.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script
         src="https://www.google.com/recaptcha/enterprise.js?render=6LdgQVQmAAAAAA4zHuTt1g6HYYulpHFVzpn7RQPT"></script>
-        <script>
-            function onClick(e) {
-              e.preventDefault();
-              grecaptcha.enterprise.ready(async () => {
-                const token = await grecaptcha.enterprise.execute('site_key', {action: 'LOGIN'});
+    <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+                const token = await grecaptcha.enterprise.execute('site_key', { action: 'LOGIN' });
                 // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
                 // reCAPTCHA Enterprise to the end user's browser.
                 // This token must be validated by creating an assessment.
                 // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
-              });
-            }
-            </script>
+            });
+        }
+    </script>
 
     <title>Inicias Sesión | LaBaguette</title>
 </head>
@@ -39,79 +38,80 @@
                 <div class="logo">
                     <a href="Index.html"><img
                             src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Encabezado%20y%20pie%20de%20pagina/LaBaguette-Encabezado.png?raw=true"></a>
-                </div>
+                
+                            <div class="Reloj">
+                                <div id="clock">12:00<span class="am-pm"> AM</span></div>
+                                <div id="message">Abierto</div>
+                            </div>
+                        </div>
             </div>
         </header>
 
         <main>
             <div class="conteiner">
-
                 <div class="c-imagen">
                     <div>
                         <img
                             src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Login/Foto%20Login.jpg?raw=true">
+                        <a href="Index.html">
+                            <i class="fa fa-home"> Regresar</i>
+                        </a>
+                        <p>Bienvenido</p>
                     </div>
+                    
                 </div>
-
                 <div class="c-formulario">
                     <div class="inputs">
-                        <div class="welcome">
-                            <div>
-                                <p>Bienvenido</p>
-                            </div>
-                        </div>
-                    <!-- <form action="recapcha.php" method="post"> -->
                         <form action="php\login_usuario.php" method="post">
-                            <div class="iniciars">
-                                <form>
-                                    <label for="documento" name="td">Tipo de documento</label>
-                                    <select name="tdoc" required>
-                                        <option value="cc" selected>Cedula De Ciudadania</option>
-                                        <option value="ce" selected>Cedula Extranjera</option>
-                                        <option value="ti" selected>Tarjeta De Identidad</option>
-                                    </select>
+                            <div class="ass">
+                                <label for="documento" name="td">Tipo de documento</label>
+                                <select name="tdoc" required>
+                                    <option value="cc" selected>Cedula De Ciudadania</option>
+                                    <option value="ce" selected>Cedula Extranjera</option>
+                                    <option value="ti" selected>Tarjeta De Identidad</option>
+                                </select>
                             </div>
-
-                            <div>
                                 <label for="n-documento">Número de documento</label>
                                 <input type="number" id="tentacles" placeholder="Dijite numero de identificación"
-                                minlength="4" maxlength="10"  name="numb" required>
-                            </div>
+                                    minlength="4" maxlength="10" name="numb" required>
+    
 
-                            <div>
                                 <label for="contraseña">Contraseña</label>
-                                <input minlength="4" maxlength="10"type="number" id="password" placeholder="Dijite su contraseña" name="contra"
-                                    required>
-                            </div>
-                           
+                                <input minlength="4" maxlength="10" type="password" id="password" placeholder="Dijite su contraseña" name="contra" required>
+                                <i class="bx bx-hide"></i>
+
+
                             <div class="access">
-                                <div class="g-recaptcha" data-sitekey="6LeGT2EmAAAAAPunzCcPiWm0oLWzWm3IMAOjbtRv" data-callback='onSubmit'
-                                data-action='submit'></div>
-                                <br/>
+                                <div class="g-recaptcha" data-sitekey="6LeGT2EmAAAAAPunzCcPiWm0oLWzWm3IMAOjbtRv"
+                                    data-callback='onSubmit' data-action='submit'></div>
+                                <br />
                             </div>
                             <div class="el">
-                                <div >
+                                <div>
                                     <a href="php\iniciado.php">
-                                        <input id="envi" class="botons" data-sitekey="6LdgQVQmAAAAAA4zHuTt1g6HYYulpHFVzpn7RQPT" type="submit" value="INGRESAR">
+                                        <input id="envi" class="botons"
+                                            data-sitekey="6LdgQVQmAAAAAA4zHuTt1g6HYYulpHFVzpn7RQPT" type="submit"
+                                            value="INGRESAR">
                                     </a>
                                 </div>
-                            
-                            <div >
-                                <p>¿Olvidaste tu contraseña?<a href="./olvideContraseña.html"> recuperala dando click
-                                        aquí </a></p>
-                                <p>¿No Tienes una cuenta? <a href="./Registrarse.html">registrate dando click aqui</a>
-                                </p>
-                            </div>
+
+                                <div>
+                                    <p>¿Olvidaste tu contraseña?<a href="./olvideContraseña.html"> recuperala dando
+                                            click
+                                            aquí </a></p>
+                                    <p>¿No Tienes una cuenta? <a href="./Registrarse.html">registrate dando click
+                                            aqui</a>
+                                    </p>
                                 </div>
                             </div>
+                    </div>
                     </form>
-                <!-- </form> -->
                 </div>
             </div>
     </div>
     </main>
     </div>
-    </form>
 </body>
-
+<script src="assets/js/contraOculta.js"></script>
+<script src="assets/js/reloj.js"></script>
 </html>

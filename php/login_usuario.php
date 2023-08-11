@@ -2,19 +2,38 @@
 session_start();
 
 include("conexion.php");
-$conectar =conectar();
+$conectar = conectar();
 
-$tdoc=$_POST["tdoc"];
-$numb=$_POST["numb"];
-$contra=md5($_POST["contra"]);
+$tdoc = $_POST["tdoc"];
+$numb = $_POST["numb"];
+$contra = $_POST["contra"];
 
-$validar=mysqli_query($conectar,"SELECT * FROM cliente WHERE ndocu='$numb' and tdoc='$tdoc'");
-if(mysqli_num_rows($validar) > 0){
-    $_SESSION['cliente']= $numb;
-    echo "<script>alert('Ingreso exitoso'); window.location.href='iniciado.php'</script>";
-    exit;
-}else{
-    echo "<script>alert('Usuario no existe, por favor verifique los datos introducidos'); window.location.href='IniciarSesion.html'</script>";
+// Utilizar consulta preparada para evitar inyección de SQL
+$stmt = $conectar->prepare("SELECT role_id FROM clientes WHERE ndocu = ? AND tdoc = ? AND contra = ?");
+$stmt->bind_param("sss", $numb, $tdoc, $contra);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $rol = $row['role_id'];
+
+    // Redirigir al usuario a la página correspondiente según su rol
+    if ($rol == 2) {
+        $_SESSION['role'] = 'Administrador';
+        $_SESSION['numb'] = $numb;
+        header("Location: ..\back-end\index.php");
+        exit;
+    } elseif ($rol == 1) {
+        $_SESSION['role'] = 'Cliente';
+        $_SESSION['numb'] = $numb;
+        header("Location: iniciado.php");
+        exit;
+    } else {
+        echo "<script>alert('Rol de usuario desconocido'); window.location.href='/baguette/IniciarSesion.html'</script>";
+    }
+} else {
+    echo "<script>alert('Usuario no existe o datos incorrectos'); window.location.href='/baguette/IniciarSesion.html'</script>";
 }
-exit;
 ?>
+

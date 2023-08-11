@@ -89,6 +89,13 @@ header {
             .user a:nth-child(2){
               font-family: var(--OpenSans);
               padding-top: 12px;
+              border-right: #eae3d7 solid 2px;
+              width: 100px;
+            }
+            .user a:nth-child(3){
+              font-family: var(--OpenSans);
+              padding-top: 12px;
+              width: 110px;
             }
       
           .shopping{
@@ -359,6 +366,45 @@ header {
             color: #fdb822;
             transition: .3s;
           }
+
+          /* Este es el estilo del reloj*/
+
+          .Reloj{
+            font-family: var(--OpenSans);
+            text-align: center;
+            margin-bottom: 10px;
+          }
+          #clock {
+            font-size: 30px;
+            color: #744f28;
+        }
+        #message {
+            font-size: 20px;
+        }
+        .abierto{
+          color: #744f28;
+          background-color: whitesmoke;
+          border-radius: 10px;
+          width: 100px;
+          display: flex;
+          justify-content: center;
+          margin: 0 auto; 
+          border: #744f28 solid 1px;
+        }
+        .cerrado {
+          color: white;
+          background-color: #744f28;
+          border-radius: 10px;
+          width: 100px;
+          display: flex;
+          justify-content: center;
+          margin: 0 auto; 
+      }
+    
+      .am-pm {
+        font-size: 20px;
+    }
+
            /* Estilos para el submenú de "Nosotros" */
     
       .has-submenu {
@@ -399,7 +445,7 @@ header {
           list-style: none;
           position: absolute;
           top: 160px;
-          left: 367px;
+          left: 630px;
         }
       }
       /* Estilos responsive para pantallas entre 480px y 768px */
@@ -475,10 +521,11 @@ header {
           }
             .logo span{
               background-image: url("https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Encabezado%20y%20pie%20de%20pagina/LaBaguette-PieDePagina.png?raw=true");
-              height: 90px;
-              max-height: 40px;
-              width: 180px;
+              height: 200px;
+              max-height: 45px; 
+              width: 200px;
               background-size: cover;
+              margin-top: 40px;
             }
         .section{
           display: flex;
@@ -533,7 +580,7 @@ header {
                   padding: 10px 0;
                 }
                 a{
-                  color: white;
+                  color: #744f28;
                   text-decoration: none;
                   padding: 5px;
                   font-family: var(--OpenSans);
@@ -541,6 +588,8 @@ header {
                 a:hover{
                   color: #fdb822;
                   transition: .3s;
+                  padding-top: 6px;
+                  padding-bottom: 6px;
                 }
         .Rights{
           display: flex;

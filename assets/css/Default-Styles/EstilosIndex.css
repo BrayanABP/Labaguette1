@@ -284,6 +284,7 @@
       font-size: 12px;
       padding-top: 15px;
       text-align: justify;
+      font-family: var(--OpenSans);
     }
 
     .letters section{

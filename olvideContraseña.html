@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/olvidecontraseña/olvideContraseña.css">
+    <link rel="stylesheet" href="./assets/css/olvidecontraseña/olvideContraseña.css">   
 
     <title>Inicias Sesión | LaBaguette</title>
 </head>
@@ -25,7 +25,11 @@
                 <div class="logo">
                     <a href="Index.html"><img
                             src="https://github.com/Ronaldo07rgr/Repositorio_LaBaguette/blob/master/assets/static/Encabezado%20y%20pie%20de%20pagina/LaBaguette-Encabezado.png?raw=true"></a>
-                </div>
+                            <div class="Reloj">
+                                <div id="clock">12:00<span class="am-pm"> AM</span></div>
+                                <div id="message">Abierto</div>
+                            </div>
+                        </div>
             </div>
         </header>
 
@@ -34,18 +38,20 @@
 
                 <div class="c-imagen">
                     <div>
-                        <img src="https://i.ibb.co/9yQgb8k/imagen-2023-04-26-094643241.png">
+                        <img
+                            src="https://i.ibb.co/9yQgb8k/imagen-2023-04-26-094643241.png">
+                        <a href="Index.html">
+                            <i class="fa fa-home"> Regresar</i>
+                        </a>
+                        <p>Recuperacion de la cuenta</p>
                     </div>
                 </div>
 
                 <div class="c-formulario">
                     <div class="inputs">
                         <div class="welcome">
-                            <div>
-                                <p>Recuperacion de la cuenta</p>
-                            </div>
                         </div>
-                        <form action="assets/php/mail.php" method="post">
+                        <form action="./php/mail.php" method="post">
                             <div>
                                 <h2>Obtener un codigo de verificacion</h2>
                             </div>
@@ -64,29 +70,11 @@
                                     <input  type="email" id="tentacles" name="correo">
                                 </div>
                             </div>
-                            <div class="overlay" id="overlay">
-                                <div class="popup" id="popup">
-                                    <div class="lol">
-                                        <p>Para proteger tu cuenta, se quiere verificar que eres tu quien esta
-                                            intentando iniciar sesion</p>
-                                    </div>
-
-                                    <div class="bo">
-                                        <label for="mensaje">Digite en codigo enviado</label>
-                                        <input type="number" id="number">
-                                    </div>
-                                    <div class="sec">
-                                        <button class="bot"><a href="./cambiarContraseña.html">siguiente</a> </button>
-                                        <button class="bot"><a href="./olvideContraseña.html">Volver</a> </button>
-                                    </div>
-                                </div>
-                            </div>
                             <div>
                         </form>
                         <div class="sec">
-                            <input type="submit" class="bot"value="Enviar SMS" ></input>
-                            <input type="button" id="botones" class="bot" value="Siguiente"></input>
-                            <input class="bot"value="Volver" ></input>
+                            <input type="submit" class="bot"value="Enviar Correo" ></input>
+                            <button type="button" class="bot" ><a href="./IniciarSesion.html">Volver</a></button>
                         </div>
                     </div>
                     </div>
@@ -96,7 +84,7 @@
     </div>
     </main>
     </div>
-    <script src="./assets/js/olvideContraseña.js"></script>
-</body>
 
+</body>
+<script src="assets/js/reloj.js"></script>
 </html>

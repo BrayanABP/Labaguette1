@@ -46,8 +46,8 @@
         margin-left: 30px;
         text-align: justify;
         width: 87%;
-        font-weight: 700;
-        line-height: 1.5;
+        font-weight: 800;
+        line-height: 1.6;
       }
       .mv-conteiner .mision-y-vision .Text{
         font-family: var(--OpenSans);
@@ -84,16 +84,18 @@
       }
 
       .conteiner .QuienesSomos .info img{
-        width: 50%;
+        width: 50%;   
         background-color: #EAE3D7;
         padding: 20px
       }
       .conteiner .QuienesSomos .info p{
         text-align: justify;
-        font-family: var(--Caveat);
+        font-family: var(--OpenSans);;
         padding: 20px;
         font-size: 15pt;
-        line-height: 1.5;
+        line-height: 1.6;
+        color: #744f28;
+        font-weight: 600;
       }
       .conteiner .QuienesSomos .infopie{
         width: 50%;
